@@ -1,7 +1,5 @@
 "use client";
 // src/app/page.tsx
-// Root shell — handles auth state and routes between pages.
-// Replace the useState auth with your Firebase Auth context when ready.
 
 import { useState } from "react";
 import LoginPage from "./login/LoginPage";
@@ -16,17 +14,21 @@ export default function Home() {
   const [user, setUser] = useState<User | null>(null);
   const [page, setPage] = useState<AppPage>("groups");
 
-  // Not authenticated — show login
   if (!user) {
     return <LoginPage onAuthSuccess={(u) => setUser(u)} />;
   }
 
-  // Authenticated — show active page
+  const sharedProps = {
+    user,
+    onNavigate: setPage,
+    onLogout: () => { setUser(null); setPage("groups"); },
+  };
+
   return (
     <>
-      {page === "groups"      && <GroupsPage      user={user} onNavigate={setPage} />}
-      {page === "leaderboard" && <LeaderboardPage user={user} onNavigate={setPage} />}
-      {page === "lineup"      && <LineupPage      user={user} onNavigate={setPage} />}
+      {page === "groups"      && <GroupsPage      {...sharedProps} />}
+      {page === "leaderboard" && <LeaderboardPage {...sharedProps} />}
+      {page === "lineup"      && <LineupPage      {...sharedProps} />}
     </>
   );
 }
