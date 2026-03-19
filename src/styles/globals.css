@@ -1,0 +1,85 @@
+/* src/styles/globals.css */
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --fp-purple:       #37003c;
+    --fp-purple-mid:   #5a0060;
+    --fp-purple-light: #7b006e;
+    --fp-green:        #00ff87;
+    --fp-green-dark:   #00c96b;
+    --fp-off-white:    #f2f4f2;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background-color: var(--fp-off-white);
+    color: #111827;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: 'Rajdhani', sans-serif;
+  }
+}
+
+@layer components {
+  /* Pitch stripe pattern */
+  .pitch-bg {
+    background: repeating-linear-gradient(
+      180deg,
+      #2d8a4e 0px,
+      #2d8a4e 48px,
+      #1f6b39 48px,
+      #1f6b39 96px
+    );
+  }
+
+  /* Subtle card hover */
+  .card-hover {
+    @apply transition-all duration-200 hover:-translate-y-1 hover:shadow-lg;
+  }
+
+  /* FootPots primary button */
+  .btn-primary {
+    @apply bg-[#37003c] text-white font-bold rounded-xl px-5 py-3
+           font-display tracking-wide transition-all duration-150
+           hover:-translate-y-px hover:shadow-lg active:translate-y-0;
+  }
+
+  /* FootPots green CTA */
+  .btn-green {
+    @apply bg-[#00ff87] text-[#37003c] font-black rounded-xl px-5 py-3
+           font-display tracking-wide transition-all duration-150
+           hover:-translate-y-px hover:shadow-md active:translate-y-0;
+  }
+
+  /* Input field */
+  .fp-input {
+    @apply w-full border-2 border-gray-200 rounded-xl px-4 py-3
+           text-sm font-medium outline-none transition-colors duration-150
+           focus:border-[#37003c] placeholder:text-gray-400;
+  }
+
+  /* Slide-up modal overlay */
+  .modal-overlay {
+    @apply fixed inset-0 bg-black/50 z-50 flex items-end justify-center;
+  }
+
+  .modal-sheet {
+    @apply bg-white rounded-t-2xl px-5 pb-10 pt-5 w-full max-w-lg
+           max-h-[90vh] overflow-y-auto;
+  }
+
+  .modal-handle {
+    @apply w-10 h-1 bg-gray-200 rounded-full mx-auto mb-5;
+  }
+}
